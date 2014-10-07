@@ -2,6 +2,6 @@
 # those data points are aggregated we want to add them together
 
 [live]
-pattern = \.live\.$
+pattern = ^app\..*\.live\.
 xFilesFactor = 0
 aggregationMethod = sum
