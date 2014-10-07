@@ -1,4 +1,4 @@
-Crittercism-Telemetry Connector
+Crittercism-Graphite Connector
 =====================
 
 A sample Crittercism API connector that pushes Crittercism data to Graphite.
