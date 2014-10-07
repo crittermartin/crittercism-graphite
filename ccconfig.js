@@ -5,7 +5,6 @@ var config = {};
 
 config.Crittercism = {};
 config.Graphite = {};
-config.Telemetry = {};
 
 // Fill in your Crittercism details below.
 // Client ID is your API access token provided by Crittercism Support.
