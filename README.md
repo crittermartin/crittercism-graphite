@@ -27,7 +27,7 @@ A sample Crittercism API connector that pushes Crittercism data to Graphite.
 
 5. Edit ccconfig.js in this directory and fill in your Crittercism and Graphite details.
 
-6. Run the app by typing: node cc
+6. Run the app by typing "node cc"
 
 7. Go to the Graphite browser (usually on port 8080) and make sure data is being populated under app.*
 
