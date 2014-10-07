@@ -1,0 +1,7 @@
+# Aggregation for live app loads stats should be "sum" because when
+# those data points are aggregated we want to add them together
+
+[live]
+pattern = \.live\.$
+xFilesFactor = 0
+aggregationMethod = sum

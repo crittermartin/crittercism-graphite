@@ -1,0 +1,16 @@
+# Example definitions for Crittercism data in Graphite's storage-schemas.conf -
+# modify to suit your needs.
+#
+# Probably should put this near the top of the file, before any "default" definitions.
+
+[app_live]
+pattern = ^app\..*\.live\.
+retentions = 10s:4h, 1m:1d, 1h:10d, 1d:5y
+
+[app_perf]
+pattern = ^app\..*\.services\.
+retentions = 15m:90d, 1d:5y
+
+[app_daily]
+pattern = ^app\.
+retentions = 1d:5y
