@@ -5,7 +5,7 @@
 
 [app_live]
 pattern = ^app\..*\.live\.
-retentions = 10s:4h, 1m:1d, 1h:10d, 1d:5y
+retentions = 1m:30d, 15m:1y, 1h:5y, 1d:10y
 
 [app_perf]
 pattern = ^app\..*\.services\.

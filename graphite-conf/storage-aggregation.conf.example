@@ -4,4 +4,4 @@
 [live]
 pattern = ^app\..*\.live\.
 xFilesFactor = 0
-aggregationMethod = sum
+aggregationMethod = last
