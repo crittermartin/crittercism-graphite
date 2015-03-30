@@ -222,7 +222,7 @@ function getLiveAppMetrics(callback) {
 	var periodic = {};
 	log('Getting live periodic data for ' + Object.keys(global.apps).length + ' apps from Crittercism...');
 	async.each(Object.keys(global.apps), function(app, callback) {
-		cc.liveStatsPeriodic(app, null, true, function(err, data) {
+		cc.liveStatsTotals(app, null, function(err, data) {
 			if (err) {
 				log('Failed to get periodic data for app id ' + app);
 			} else {
