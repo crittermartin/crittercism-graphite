@@ -219,14 +219,14 @@ function getGroupedAppMetrics(duration, callback) {
 }
 
 function getLiveAppMetrics(callback) {
-	var periodic = {};
-	log('Getting live periodic data for ' + Object.keys(global.apps).length + ' apps from Crittercism...');
+	var liveStats = {};
+	log('Getting live stats for ' + Object.keys(global.apps).length + ' apps from Crittercism...');
 	async.each(Object.keys(global.apps), function(app, callback) {
-		cc.liveStatsPeriodic(app, null, true, function(err, data) {
+		cc.liveStatsTotals(app, null, function(err, data) {
 			if (err) {
-				log('Failed to get periodic data for app id ' + app);
+				log('Failed to get live stats for app id ' + app);
 			} else {
-				periodic[app] = data;
+				liveStats[app] = data;
 			}
 			callback(null);
 		});
@@ -236,22 +236,23 @@ function getLiveAppMetrics(callback) {
 			log('Didn\'t get all the live metrics: ' + err.message + ' (ignored)');
 		}
 		var buffer = '';
-		for ( app in periodic ) {
+		for ( app in liveStats ) {
 			var appNameStr = global.apps[app].appName.split(' ').join('_').split('.').join('-');
 			var prefix = 'app.' + appNameStr + '.live.';
 
-			periodic[app].periodic_data.forEach(function(point) {
-				buffer += prefix + 'appLoads ' + point.app_loads + ' ' + point.time / 1000 + '\n';
-				buffer += prefix + 'crashes ' + point.app_errors + ' ' + point.time / 1000 + '\n';
-				buffer += prefix + 'exceptions ' + point.app_exceptions + ' ' + point.time / 1000 + '\n';
-			});
+			var d = new Date();
+			var ts = d.getTime() / 1000;
+
+			buffer += prefix + 'appLoads ' + liveStats[app].total_app_loads + ' ' + ts + '\n';
+			buffer += prefix + 'crashes ' + liveStats[app].total_errors + ' ' + ts + '\n';
+			buffer += prefix + 'exceptions ' + liveStats[app].total_exceptions + ' ' + ts + '\n';
 		}
-		log('Sending ' + buffer.split('\n').length + ' live app metrics to Graphite...');
+
+		log('Sending ' + buffer.split('\n').length + ' live app metrics to Graphite:');
 		sendBuffer(buffer);
 		callback(null);
 	});
 }
-
 
 function sendBuffer(buffer) {
 	var host = config.Graphite.host;

@@ -113,7 +113,7 @@ dashboard.rows.push(
           },
           "targets": [
             {
-              "target": "app.*.live." + metric
+              "target": "derivative(app.*.live." + metric + ")"
             }
           ],
           "aliasColors": {},
